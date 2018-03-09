@@ -1,0 +1,28 @@
+{
+  "name": "gulp-tasklist-run",
+  "version": "1.0.0",
+  "description": "Gulp task list run synchronous.",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcospds/gulp-tasklist-run.git"
+  },
+  "keywords": [
+    "gulp",
+    "tasks",
+    "synchronous",
+    "list"
+  ],
+  "author": "Marcos Paulo dos Santos <marcos_p21@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marcospds/gulp-tasklist-run/issues"
+  },
+  "homepage": "https://github.com/marcospds/gulp-tasklist-run#readme"
+}
