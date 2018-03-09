@@ -6,12 +6,12 @@ module.exports = {
         forEach(tasklist.data, inclusion, exclusions, function (key){
             tasks.push(function (pTasks, pos){
                 gulp.start(key, function(){
-					run(pTasks, pos)
-				});
+                    run(pTasks, pos)
+                });
             });
         });
-		if(tasks.length > 0)
-			tasks[tasks.length - 1].call(null, tasks, tasks.length - 1);
+        if(tasks.length > 0)
+            tasks[tasks.length - 1].call(null, tasks, tasks.length - 1);
     }
 };
 
