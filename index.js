@@ -1,9 +1,9 @@
 var gulp = require('gulp');
 
 module.exports = {
-    run(tasklist, inclusion, exclusions) {
+    run(tasklist, contains, excluded) {
         var tasks = [];
-        forEach(tasklist.data, inclusion, exclusions, function (key){
+        forEach(tasklist.data, contains, excluded, function (key){
             tasks.push(function (pTasks, pos){
                 gulp.start(key, function(){
                     run(pTasks, pos)
@@ -15,7 +15,10 @@ module.exports = {
     }
 };
 
-function forEach(obj, inclusion, exclusions, fn){
+function forEach(obj, contains, excluded, fn){
+
+    excluded = excluded + ",";
+    
     var key;
     for (key in obj) {
         if (exec(fn, key) === false) {
@@ -23,8 +26,8 @@ function forEach(obj, inclusion, exclusions, fn){
         }
     }
     function exec(fn, key){
-        if(!key.startsWith(inclusion)
-        || exclusions.includes(key))
+        if(!key.startsWith(contains)
+        || excluded.includes(key + ","))
             return true;
         return fn.call(null, key);
     }
