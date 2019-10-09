@@ -15,19 +15,20 @@ module.exports = {
     }
 };
 
-function forEach(obj, contains, excluded, fn){
-
-    excluded = excluded + ",";
-    
+function forEach(obj, contains, excluded, fn) {
+    var arrExcluded = excluded.split(',')
+    var regExContains = new RegExp(contains)
     var key;
+
     for (key in obj) {
         if (exec(fn, key) === false) {
             break;
         }
     }
     function exec(fn, key){
-        if(!key.startsWith(contains)
-        || excluded.includes(key + ","))
+        var isExcluded = arrExcluded.find(e => new RegExp(e).test(key) )
+
+        if(regExContains.test(key) && isExcluded !== undefined)
             return true;
         return fn.call(null, key);
     }
