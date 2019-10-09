@@ -26,9 +26,9 @@ function forEach(obj, contains, excluded, fn) {
         }
     }
     function exec(fn, key){
-        var isExcluded = arrExcluded.find(e => new RegExp(e).test(key) )
+        var exMatch = arrExcluded.find(e => new RegExp(e).test(key) )
 
-        if(regExContains.test(key) && isExcluded === undefined)
+        if(regExContains.test(key) && exMatch === undefined)
             return fn.call(null, key);
         return true;
     }
