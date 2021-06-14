@@ -15,21 +15,22 @@ module.exports = {
     }
 };
 
-function forEach(obj, contains, excluded, fn){
-
-    excluded = excluded + ",";
-    
+function forEach(obj, contains, excluded, fn) {
+    var arrExcluded = excluded.split(',')
+    var regExContains = new RegExp(contains)
     var key;
+
     for (key in obj) {
         if (exec(fn, key) === false) {
             break;
         }
     }
     function exec(fn, key){
-        if(!key.startsWith(contains)
-        || excluded.includes(key + ","))
-            return true;
-        return fn.call(null, key);
+        var exMatch = arrExcluded.find(e => new RegExp(e).test(key))
+
+        if(regExContains.test(key) && exMatch === undefined)
+            return fn.call(null, key);
+        return true;
     }
     return forEach;
 };
