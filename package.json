@@ -1,6 +1,6 @@
 {
   "name": "gulp-tasklist-run",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Gulp task list run synchronous.",
   "main": "index.js",
   "dependencies": {
