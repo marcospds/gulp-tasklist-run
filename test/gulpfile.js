@@ -1,19 +1,5 @@
-# gulp-tasklist-run
-Gulp task list run synchronous.
-
-## Installation
-
-```shell
-npm install --save gulp-tasklist-run
-```
-
-## How to use
-
-Here is the demo code:
-
-```js
 const gulp = require('gulp')
-const TaskListRun = require('gulp-tasklist-run');
+const TaskListRun = require('../index.js')
 
 gulp.task('compile:demo', (done) => {
   console.log('It works compile:demo!')
@@ -56,28 +42,5 @@ gulp.task('unit:*', (done) => {
 gulp.task('compile:*', (done) => {
   TaskListRun.run(gulp, 'compile:*', 'compile:\\*', done)
 })
-```
 
-Just require `gulp` package and call `run()` method, it receives three parameter, the gulp instance, the inclusion(use starts with) and the excluded tasks(regexp).
-Sample:
-
-```javascript
-gulp.task('e2e:*', (done) => {
-  TaskListRun.run(gulp, 'e2e:*', 'e2e:\\*', done)
-})
-
-//Starting 'e2e:*'...
-//Starting 'e2e:login'...
-//It works e2e:login!
-//Finished 'e2e:login' after 745 μs
-//Starting 'e2e:demo'...
-//It works e2e:demo!
-//Finished 'e2e:demo' after 339 μs
-//Starting 'finish_e2e:*'...
-//Finished 'finish_e2e:*' after 263 μs
-//Finished 'e2e:*' after 2.7 ms
-```
-
-## License
-
-MIT
+gulp.task('default', gulp.series('e2e:*', 'compile:*', 'unit:*'))
