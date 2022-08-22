@@ -12,63 +12,61 @@ npm install --save gulp-tasklist-run
 Here is the demo code:
 
 ```js
-var gulp = require('gulp');
-const TaskList = require('gulp-tasklist');
+var gulp = require("gulp");
+
 const TaskListRun = require('gulp-tasklist-run');
 
-gulp.task('compile:typescript', [], function () {
-    // ...
+gulp.task("compile:demo", (done) => {
+  console.log("It works compile:demo!");
+  done();
 });
 
-gulp.task('e2e:demo', [], function () {
-    // ...
+gulp.task("compile:login", (done) => {
+  console.log("It works compile:login!");
+  done();
 });
 
-gulp.task('e2e:test', [], function () {
-    // ...
+gulp.task("e2e:demo", (done) => {
+  console.log("It works e2e:demo!");
+  done();
 });
 
-gulp.task('e2e:login', [], function () {
-    // ...
+gulp.task("e2e:login", (done) => {
+  console.log("It works e2e:login!");
+  done();
 });
 
-gulp.task('e2e:menu', [], function () {
-    // ..
+gulp.task("unit:demo", (done) => {
+  console.log("It works unit:demo!");
+  done();
 });
 
-gulp.task('e2e:sec', [], function () {
-    // ..
+gulp.task("unit:login", (done) => {
+  console.log("It works unit:login!");
+  done();
 });
 ```
 
-Just require `gulp-tasklist-run` package and call `run()` method, it receives three parameter, the result of getList(gulp-tasklist), the inclusion(use starts with) and the excluded tasks.
+Just require `gulp` package and call `run()` method, it receives three parameter, the gulp instance, the inclusion(use starts with) and the excluded tasks(regexp).
 Sample:
 
 ```javascript
-gulp.task('e2e:*', function() {
-
-    let tasks = TaskList.getList('./gulpfile.js');
-
-    TaskListRun.run(tasks, 'e2e:', 'e2e:*,e2e:test,e2e:demo');
+gulp.task("e2e:*", (done) => {
+  TaskListRun.run(gulp, "e2e:*", "e2e:\\*", done);
 });
 
-//> Executing task: node_modules\.bin\gulp.cmd e2e:* <
-//
-//[15:26:00] Using gulpfile c:\GIT\master\gulpfile.js
-//[15:26:00] Starting 'e2e:*'...
-//[15:26:00] Finished 'e2e:*' after 13 ms
-//[15:26:00] Starting 'e2e:sec'...
-//[15:26:00] Finished 'e2e:sec' after 91 μs
-//[15:26:00] Starting 'e2e:menu'...
-//[15:26:00] Finished 'e2e:menu' after 31 μs
-//[15:26:00] Starting 'e2e:login'...
-//[15:26:00] Finished 'e2e:login' after 23 μs
-//
-//Terminal will be reused by tasks, press any key to close it.
+//Starting 'e2e:*'...
+//Starting 'e2e:login'...
+//It works e2e:login!
+//Finished 'e2e:login' after 745 μs
+//Starting 'e2e:demo'...
+//It works e2e:demo!
+//Finished 'e2e:demo' after 339 μs
+//Starting 'finish_e2e:*'...
+//Finished 'finish_e2e:*' after 263 μs
+//Finished 'e2e:*' after 2.7 ms
 ```
 
 ## License
 
 MIT
-
-

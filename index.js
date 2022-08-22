@@ -1,39 +1,30 @@
-//const gulp = require("gulp");
-const TaskList = require('gulp-tasklist');
-//const execSync = require('child_process').execSync;
-
 module.exports = {
-  run(gulp, file, contains, excluded, cb) {
-    var tasklist = TaskList.getList(file);
+  run(gulp, contains, excluded, cb) {
+    var tasklist = gulp._registry._tasks;
     var tasks = [];
-    var keys = []
-    forEach(tasklist.data, contains, excluded, function (key) {
+    var keys = [];
+
+    forEach(tasklist, contains, excluded, function (key) {
       tasks.push(function (pTasks, pos) {
-        //const output = execSync(`gulp -f ${file} ${key}`, { encoding: 'utf-8' });  // the default is 'buffer'
-        //console.log(`${output.substring(0, output.length - 1).replace(/.*\n/, "")}`);
-
-        //console.log(gulp._registry._tasks["compile:demo"].unwrap().call(this, cb));
-
-        //console.log(gulp._registry._tasks);
-
-        //console.log(key);
-
-        //console.log(gulp._registry._tasks[key]);
-
         keys.push(key);
+        if (run(pTasks, pos, keys)) {
+          var finishName = `finish_${contains}`;
 
-        //gulp.series(key)();
+          gulp.task(finishName, (done) => {
+            done();
+            cb();
+          });
 
-        if(run(pTasks, pos, keys)){
-          keys.push(cb);
+          keys.push(finishName);
           gulp.series(keys)();
         }
       });
     });
+
     if (tasks.length > 0) {
       tasks[tasks.length - 1].call(null, tasks, tasks.length - 1);
     }
-  }
+  },
 };
 
 function forEach(obj, contains, excluded, fn) {
@@ -42,7 +33,9 @@ function forEach(obj, contains, excluded, fn) {
   var key;
 
   for (key in obj) {
-    if (exec(fn, key.replace(/\"/g, ""), regExContains, arrExcluded) === false) {
+    if (
+      exec(fn, key.replace(/\"/g, ""), regExContains, arrExcluded) === false
+    ) {
       break;
     }
   }

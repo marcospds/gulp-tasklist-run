@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/marcospds/gulp-tasklist-run#readme",
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-tasklist": "^0.0.1"
+    "gulp": "^4.0.2"
   }
 }
