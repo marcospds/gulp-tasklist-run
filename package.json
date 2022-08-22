@@ -4,7 +4,8 @@
   "description": "Gulp task list run synchronous.",
   "main": "index.js",
   "scripts": {
-    "test": "gulp -f test/gulpfile.js"
+    "test": "gulp -f test/gulpfile.js",
+    "lint": "eslint --max-warnings 0 \"**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,11 @@
   },
   "homepage": "https://github.com/marcospds/gulp-tasklist-run#readme",
   "devDependencies": {
+    "eslint": "^8.22.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-promise": "^6.0.0",
     "gulp": "^4.0.2"
   }
 }

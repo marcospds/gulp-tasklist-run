@@ -12,48 +12,59 @@ npm install --save gulp-tasklist-run
 Here is the demo code:
 
 ```js
-var gulp = require("gulp");
-
+const gulp = require('gulp')
 const TaskListRun = require('gulp-tasklist-run');
 
-gulp.task("compile:demo", (done) => {
-  console.log("It works compile:demo!");
-  done();
-});
+gulp.task('compile:demo', (done) => {
+  console.log('It works compile:demo!')
+  done()
+})
 
-gulp.task("compile:login", (done) => {
-  console.log("It works compile:login!");
-  done();
-});
+gulp.task('compile:login', (done) => {
+  console.log('It works compile:login!')
+  done()
+})
 
-gulp.task("e2e:demo", (done) => {
-  console.log("It works e2e:demo!");
-  done();
-});
+gulp.task('e2e:demo', (done) => {
+  console.log('It works e2e:demo!')
+  done()
+})
 
-gulp.task("e2e:login", (done) => {
-  console.log("It works e2e:login!");
-  done();
-});
+gulp.task('e2e:login', (done) => {
+  console.log('It works e2e:login!')
+  done()
+})
 
-gulp.task("unit:demo", (done) => {
-  console.log("It works unit:demo!");
-  done();
-});
+gulp.task('unit:demo', (done) => {
+  console.log('It works unit:demo!')
+  done()
+})
 
-gulp.task("unit:login", (done) => {
-  console.log("It works unit:login!");
-  done();
-});
+gulp.task('unit:login', (done) => {
+  console.log('It works unit:login!')
+  done()
+})
+
+gulp.task('e2e:*', (done) => {
+  TaskListRun.run(gulp, 'e2e:*', 'e2e:\\*', done)
+})
+
+gulp.task('unit:*', (done) => {
+  TaskListRun.run(gulp, 'unit:*', 'unit:\\*', done)
+})
+
+gulp.task('compile:*', (done) => {
+  TaskListRun.run(gulp, 'compile:*', 'compile:\\*', done)
+})
 ```
 
 Just require `gulp` package and call `run()` method, it receives three parameter, the gulp instance, the inclusion(use starts with) and the excluded tasks(regexp).
 Sample:
 
 ```javascript
-gulp.task("e2e:*", (done) => {
-  TaskListRun.run(gulp, "e2e:*", "e2e:\\*", done);
-});
+gulp.task('e2e:*', (done) => {
+  TaskListRun.run(gulp, 'e2e:*', 'e2e:\\*', done)
+})
 
 //Starting 'e2e:*'...
 //Starting 'e2e:login'...
