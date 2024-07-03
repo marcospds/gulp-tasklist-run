@@ -1,0 +1,38 @@
+# .github/workflows/release-on-version-change.yml
+
+name: Create Release on Version Change
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'package.json'
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Get current version
+        id: get_version
+        run: echo "current_version=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+
+      - name: Create GitHub release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.current_version }}
+          release_name: Release ${{ env.current_version }}
+          body: "Automated release for version ${{ env.current_version }} of the package."
+          draft: false
+          prerelease: false
