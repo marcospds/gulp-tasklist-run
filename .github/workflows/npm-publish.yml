@@ -4,8 +4,11 @@
 name: CD - Node.js Package
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - master
+    paths:
+      - 'package.json'
 
 jobs:
   build:
