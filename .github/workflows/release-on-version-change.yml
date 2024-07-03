@@ -1,11 +1,11 @@
 # .github/workflows/release-on-version-change.yml
 
-name: Create Release on Version Change
+name: CI - Create Release on Version Change
 
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - 'package.json'
 
